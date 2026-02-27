@@ -21,12 +21,27 @@ public class Aluno {
     public Aluno(){}
 
     public Aluno(String nome, String ra, String email, BigDecimal nota1, BigDecimal nota2, BigDecimal nota3) {
+        validarNota(nota1);
+        validarNota(nota2);
+        validarNota(nota3);
+
         this.nome = nome;
         this.ra = ra;
         this.email = email;
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
+    }
+
+    private void validarNota(BigDecimal nota) {
+        if (nota == null) {
+            throw new IllegalArgumentException("Nota não pode ser nula.");
+        }
+
+        if (nota.compareTo(BigDecimal.ZERO) < 0 ||
+                nota.compareTo(BigDecimal.TEN) > 0) {
+            throw new IllegalArgumentException("Nota deve estar entre 0 e 10.");
+        }
     }
 
     public String getNome() {
@@ -58,6 +73,7 @@ public class Aluno {
     }
 
     public void setNota1(BigDecimal nota1) {
+        validarNota(nota1);
         this.nota1 = nota1;
     }
 
@@ -66,6 +82,7 @@ public class Aluno {
     }
 
     public void setNota2(BigDecimal nota2) {
+        validarNota(nota2);
         this.nota2 = nota2;
     }
 
@@ -74,6 +91,7 @@ public class Aluno {
     }
 
     public void setNota3(BigDecimal nota3) {
+        validarNota(nota3);
         this.nota3 = nota3;
     }
 

@@ -1,3 +1,7 @@
+//Membros da Equipe:
+//-Vinicius de Brito
+//-Pedro Moraes de Carvalho
+
 import DAO.AlunoDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -11,7 +15,7 @@ public class Main {
 
     private static EntityManager entityManager;
     private static AlunoDAO alunoDAO;
-    private static Scanner sc = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -22,8 +26,8 @@ public class Main {
 
         do {
             exibirMenu();
-            opcao = sc.nextInt();
-            sc.nextLine();
+            opcao = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1 -> cadastrarAluno();
@@ -38,7 +42,7 @@ public class Main {
         } while (opcao != 6);
 
         entityManager.close();
-        sc.close();
+        scanner.close();
     }
 
     private static void exibirMenu() {
@@ -55,23 +59,23 @@ public class Main {
     private static void cadastrarAluno() {
         try {
             System.out.print("Nome: ");
-            String nome = sc.nextLine();
+            String nome = scanner.nextLine();
 
             System.out.print("RA: ");
-            String ra = sc.nextLine();
+            String ra = scanner.nextLine();
 
             System.out.print("Email: ");
-            String email = sc.nextLine();
+            String email = scanner.nextLine();
 
             System.out.print("Nota 1: ");
-            BigDecimal n1 = sc.nextBigDecimal();
+            BigDecimal n1 = scanner.nextBigDecimal();
 
             System.out.print("Nota 2: ");
-            BigDecimal n2 = sc.nextBigDecimal();
+            BigDecimal n2 = scanner.nextBigDecimal();
 
             System.out.print("Nota 3: ");
-            BigDecimal n3 = sc.nextBigDecimal();
-            sc.nextLine();
+            BigDecimal n3 = scanner.nextBigDecimal();
+            scanner.nextLine();
 
             Aluno aluno = new Aluno(nome, ra, email, n1, n2, n3);
 
@@ -90,7 +94,7 @@ public class Main {
     private static void excluirAluno() {
         try {
             System.out.print("Nome do aluno para excluir: ");
-            String nome = sc.nextLine();
+            String nome = scanner.nextLine();
 
             entityManager.getTransaction().begin();
             alunoDAO.remover(nome);
@@ -107,7 +111,7 @@ public class Main {
     private static void alterarAluno() {
         try {
             System.out.print("Nome do aluno para alterar: ");
-            String nome = sc.nextLine();
+            String nome = scanner.nextLine();
 
             if (alunoDAO.buscarPorNome(nome).isEmpty()) {
                 System.out.println("Aluno não encontrado. Atualização cancelada.");
@@ -115,23 +119,23 @@ public class Main {
             }
 
             System.out.print("Novo nome: ");
-            String novoNome = sc.nextLine();
+            String novoNome = scanner.nextLine();
 
             System.out.print("Novo RA: ");
-            String novoRa = sc.nextLine();
+            String novoRa = scanner.nextLine();
 
             System.out.print("Novo Email: ");
-            String novoEmail = sc.nextLine();
+            String novoEmail = scanner.nextLine();
 
             System.out.print("Nova Nota 1: ");
-            BigDecimal n1 = sc.nextBigDecimal();
+            BigDecimal n1 = scanner.nextBigDecimal();
 
             System.out.print("Nova Nota 2: ");
-            BigDecimal n2 = sc.nextBigDecimal();
+            BigDecimal n2 = scanner.nextBigDecimal();
 
             System.out.print("Nova Nota 3: ");
-            BigDecimal n3 = sc.nextBigDecimal();
-            sc.nextLine();
+            BigDecimal n3 = scanner.nextBigDecimal();
+            scanner.nextLine();
 
             Aluno alunoAtualizado =
                     new Aluno(novoNome, novoRa, novoEmail, n1, n2, n3);
@@ -150,7 +154,7 @@ public class Main {
 
     private static void buscarAluno() {
         System.out.print("Nome do aluno: ");
-        String nome = sc.nextLine();
+        String nome = scanner.nextLine();
 
         alunoDAO.buscarPorNome(nome)
                 .ifPresentOrElse(
